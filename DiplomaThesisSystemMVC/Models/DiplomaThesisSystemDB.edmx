@@ -1,0 +1,935 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DiplomaThesisSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CommisionTeacher">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ThesisDefenceCommisionID" Type="int" Nullable="false" />
+          <Property Name="TeacherID" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Defence">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StudentID" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ThesisDefenceCommisionID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DiplomaThesis">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="NumberOfStudents" Type="int" />
+          <Property Name="FieldOfStudy" Type="nvarchar" MaxLength="255" />
+          <Property Name="Degree" Type="nvarchar" MaxLength="255" />
+          <Property Name="Abstract" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="DiplomaThesisTopic">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReviewerID" Type="nvarchar" MaxLength="255" />
+          <Property Name="TeacherID" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="NumberOfStudents" Type="nvarchar" MaxLength="255" />
+          <Property Name="FieldOfStudy" Type="nvarchar" MaxLength="255" />
+          <Property Name="Degree" Type="nvarchar" MaxLength="255" />
+          <Property Name="Availability" Type="nvarchar" MaxLength="255" />
+          <Property Name="Status" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DiplomaThesisID" Type="int" Nullable="false" />
+          <Property Name="ReviewerID" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Topic" Type="nvarchar" MaxLength="255" />
+          <Property Name="Grade" Type="int" />
+          <Property Name="Content" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Reviewer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ReviewID" Type="int" />
+          <Property Name="DiplomaThesisTopicID" Type="int" />
+          <Property Name="SupervisorID" Type="nvarchar" MaxLength="255" />
+          <Property Name="DiplomaThesisID" Type="int" />
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Semester" Type="int" />
+          <Property Name="FieldOfStudy" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" />
+          <Property Name="Department" Type="nvarchar" MaxLength="255" />
+          <Property Name="isSupervisor" Type="int" />
+        </EntityType>
+        <EntityType Name="ThesisDefenceCommision">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SupervisorID" Type="nvarchar" MaxLength="255" />
+          <Property Name="ReviewerID" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Vote">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TeacherID" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="DiplomaThesisTopicID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Defence_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Defence" Type="Self.Defence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Defence">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiplomaThesisTopic_Reviewer">
+          <End Role="Reviewer" Type="Self.Reviewer" Multiplicity="0..1" />
+          <End Role="DiplomaThesisTopic" Type="Self.DiplomaThesisTopic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reviewer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DiplomaThesisTopic">
+              <PropertyRef Name="ReviewerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiplomaThesisTopic_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="DiplomaThesisTopic" Type="Self.DiplomaThesisTopic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DiplomaThesisTopic">
+              <PropertyRef Name="TeacherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Review_DiplomaThesis">
+          <End Role="DiplomaThesis" Type="Self.DiplomaThesis" Multiplicity="1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiplomaThesis">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="DiplomaThesisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Review_Reviewer">
+          <End Role="Reviewer" Type="Self.Reviewer" Multiplicity="1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reviewer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="ReviewerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_DiplomaThesis">
+          <End Role="DiplomaThesis" Type="Self.DiplomaThesis" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiplomaThesis">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="DiplomaThesisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_DiplomaThesisTopic">
+          <End Role="DiplomaThesisTopic" Type="Self.DiplomaThesisTopic" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiplomaThesisTopic">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="DiplomaThesisTopicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Review">
+          <End Role="Review" Type="Self.Review" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Review">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="ReviewID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Supervisor">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="SupervisorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThesisDefenceCommision_Defence">
+          <End Role="ThesisDefenceCommision" Type="Self.ThesisDefenceCommision" Multiplicity="1" />
+          <End Role="Defence" Type="Self.Defence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ThesisDefenceCommision">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Defence">
+              <PropertyRef Name="ThesisDefenceCommisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThesisDefenceCommision_Reviewer">
+          <End Role="Reviewer" Type="Self.Reviewer" Multiplicity="0..1" />
+          <End Role="ThesisDefenceCommision" Type="Self.ThesisDefenceCommision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reviewer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThesisDefenceCommision">
+              <PropertyRef Name="ReviewerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThesisDefenceCommision_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+          <End Role="ThesisDefenceCommision" Type="Self.ThesisDefenceCommision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThesisDefenceCommision">
+              <PropertyRef Name="SupervisorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThesisDefenceCommision-Teacher_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="CommisionTeacher" Type="Self.CommisionTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CommisionTeacher">
+              <PropertyRef Name="TeacherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThesisDefenceCommision-Teacher_ThesisDefenceCommision">
+          <End Role="ThesisDefenceCommision" Type="Self.ThesisDefenceCommision" Multiplicity="1" />
+          <End Role="CommisionTeacher" Type="Self.CommisionTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ThesisDefenceCommision">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CommisionTeacher">
+              <PropertyRef Name="ThesisDefenceCommisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vote_DiplomaThesisTopic">
+          <End Role="DiplomaThesisTopic" Type="Self.DiplomaThesisTopic" Multiplicity="1" />
+          <End Role="Vote" Type="Self.Vote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiplomaThesisTopic">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vote">
+              <PropertyRef Name="DiplomaThesisTopicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vote_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Vote" Type="Self.Vote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vote">
+              <PropertyRef Name="TeacherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DiplomaThesisSystemModelStoreContainer">
+          <EntitySet Name="CommisionTeacher" EntityType="Self.CommisionTeacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Defence" EntityType="Self.Defence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DiplomaThesis" EntityType="Self.DiplomaThesis" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DiplomaThesisTopic" EntityType="Self.DiplomaThesisTopic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Review" EntityType="Self.Review" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reviewer" EntityType="Self.Reviewer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ThesisDefenceCommision" EntityType="Self.ThesisDefenceCommision" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vote" EntityType="Self.Vote" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Defence_Student" Association="Self.FK_Defence_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Defence" EntitySet="Defence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiplomaThesisTopic_Reviewer" Association="Self.FK_DiplomaThesisTopic_Reviewer">
+            <End Role="Reviewer" EntitySet="Reviewer" />
+            <End Role="DiplomaThesisTopic" EntitySet="DiplomaThesisTopic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiplomaThesisTopic_Teacher" Association="Self.FK_DiplomaThesisTopic_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="DiplomaThesisTopic" EntitySet="DiplomaThesisTopic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Review_DiplomaThesis" Association="Self.FK_Review_DiplomaThesis">
+            <End Role="DiplomaThesis" EntitySet="DiplomaThesis" />
+            <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Review_Reviewer" Association="Self.FK_Review_Reviewer">
+            <End Role="Reviewer" EntitySet="Reviewer" />
+            <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_DiplomaThesis" Association="Self.FK_Student_DiplomaThesis">
+            <End Role="DiplomaThesis" EntitySet="DiplomaThesis" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_DiplomaThesisTopic" Association="Self.FK_Student_DiplomaThesisTopic">
+            <End Role="DiplomaThesisTopic" EntitySet="DiplomaThesisTopic" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Review" Association="Self.FK_Student_Review">
+            <End Role="Review" EntitySet="Review" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Supervisor" Association="Self.FK_Student_Supervisor">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThesisDefenceCommision_Defence" Association="Self.FK_ThesisDefenceCommision_Defence">
+            <End Role="ThesisDefenceCommision" EntitySet="ThesisDefenceCommision" />
+            <End Role="Defence" EntitySet="Defence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThesisDefenceCommision_Reviewer" Association="Self.FK_ThesisDefenceCommision_Reviewer">
+            <End Role="Reviewer" EntitySet="Reviewer" />
+            <End Role="ThesisDefenceCommision" EntitySet="ThesisDefenceCommision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThesisDefenceCommision_Teacher" Association="Self.FK_ThesisDefenceCommision_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="ThesisDefenceCommision" EntitySet="ThesisDefenceCommision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThesisDefenceCommision-Teacher_Teacher" Association="Self.FK_ThesisDefenceCommision-Teacher_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="CommisionTeacher" EntitySet="CommisionTeacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThesisDefenceCommision-Teacher_ThesisDefenceCommision" Association="Self.FK_ThesisDefenceCommision-Teacher_ThesisDefenceCommision">
+            <End Role="ThesisDefenceCommision" EntitySet="ThesisDefenceCommision" />
+            <End Role="CommisionTeacher" EntitySet="CommisionTeacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vote_DiplomaThesisTopic" Association="Self.FK_Vote_DiplomaThesisTopic">
+            <End Role="DiplomaThesisTopic" EntitySet="DiplomaThesisTopic" />
+            <End Role="Vote" EntitySet="Vote" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vote_Teacher" Association="Self.FK_Vote_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Vote" EntitySet="Vote" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DiplomaThesisSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CommisionTeacher">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ThesisDefenceCommisionID" Type="Int32" Nullable="false" />
+          <Property Name="TeacherID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK_ThesisDefenceCommision_Teacher_Teacher" FromRole="CommisionTeacher" ToRole="Teacher" />
+          <NavigationProperty Name="ThesisDefenceCommision" Relationship="Self.FK_ThesisDefenceCommision_Teacher_ThesisDefenceCommision" FromRole="CommisionTeacher" ToRole="ThesisDefenceCommision" />
+        </EntityType>
+        <EntityType Name="Defence">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StudentID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ThesisDefenceCommisionID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_Defence_Student" FromRole="Defence" ToRole="Student" />
+          <NavigationProperty Name="ThesisDefenceCommision" Relationship="Self.FK_ThesisDefenceCommision_Defence" FromRole="Defence" ToRole="ThesisDefenceCommision" />
+        </EntityType>
+        <EntityType Name="DiplomaThesis">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="NumberOfStudents" Type="Int32" />
+          <Property Name="FieldOfStudy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Degree" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Abstract" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Review" Relationship="Self.FK_Review_DiplomaThesis" FromRole="DiplomaThesis" ToRole="Review" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_Student_DiplomaThesis" FromRole="DiplomaThesis" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="DiplomaThesisTopic">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReviewerID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TeacherID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="NumberOfStudents" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FieldOfStudy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Degree" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Availability" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Reviewer" Relationship="Self.FK_DiplomaThesisTopic_Reviewer" FromRole="DiplomaThesisTopic" ToRole="Reviewer" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK_DiplomaThesisTopic_Teacher" FromRole="DiplomaThesisTopic" ToRole="Teacher" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_Student_DiplomaThesisTopic" FromRole="DiplomaThesisTopic" ToRole="Student" />
+          <NavigationProperty Name="Vote" Relationship="Self.FK_Vote_DiplomaThesisTopic" FromRole="DiplomaThesisTopic" ToRole="Vote" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DiplomaThesisID" Type="Int32" Nullable="false" />
+          <Property Name="ReviewerID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Topic" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Grade" Type="Int32" />
+          <Property Name="Content" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DiplomaThesis" Relationship="Self.FK_Review_DiplomaThesis" FromRole="Review" ToRole="DiplomaThesis" />
+          <NavigationProperty Name="Reviewer" Relationship="Self.FK_Review_Reviewer" FromRole="Review" ToRole="Reviewer" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_Student_Review" FromRole="Review" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Reviewer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DiplomaThesisTopic" Relationship="Self.FK_DiplomaThesisTopic_Reviewer" FromRole="Reviewer" ToRole="DiplomaThesisTopic" />
+          <NavigationProperty Name="Review" Relationship="Self.FK_Review_Reviewer" FromRole="Reviewer" ToRole="Review" />
+          <NavigationProperty Name="ThesisDefenceCommision" Relationship="Self.FK_ThesisDefenceCommision_Reviewer" FromRole="Reviewer" ToRole="ThesisDefenceCommision" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReviewID" Type="Int32" />
+          <Property Name="DiplomaThesisTopicID" Type="Int32" />
+          <Property Name="SupervisorID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DiplomaThesisID" Type="Int32" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Semester" Type="Int32" />
+          <Property Name="FieldOfStudy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Defence" Relationship="Self.FK_Defence_Student" FromRole="Student" ToRole="Defence" />
+          <NavigationProperty Name="DiplomaThesis" Relationship="Self.FK_Student_DiplomaThesis" FromRole="Student" ToRole="DiplomaThesis" />
+          <NavigationProperty Name="DiplomaThesisTopic" Relationship="Self.FK_Student_DiplomaThesisTopic" FromRole="Student" ToRole="DiplomaThesisTopic" />
+          <NavigationProperty Name="Review" Relationship="Self.FK_Student_Review" FromRole="Student" ToRole="Review" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK_Student_Supervisor" FromRole="Student" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="Teacher">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Department" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="isSupervisor" Type="Int32" />
+          <NavigationProperty Name="CommisionTeacher" Relationship="Self.FK_ThesisDefenceCommision_Teacher_Teacher" FromRole="Teacher" ToRole="CommisionTeacher" />
+          <NavigationProperty Name="DiplomaThesisTopic" Relationship="Self.FK_DiplomaThesisTopic_Teacher" FromRole="Teacher" ToRole="DiplomaThesisTopic" />
+          <NavigationProperty Name="Student" Relationship="Self.FK_Student_Supervisor" FromRole="Teacher" ToRole="Student" />
+          <NavigationProperty Name="ThesisDefenceCommision" Relationship="Self.FK_ThesisDefenceCommision_Teacher" FromRole="Teacher" ToRole="ThesisDefenceCommision" />
+          <NavigationProperty Name="Vote" Relationship="Self.FK_Vote_Teacher" FromRole="Teacher" ToRole="Vote" />
+        </EntityType>
+        <EntityType Name="ThesisDefenceCommision">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SupervisorID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ReviewerID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CommisionTeacher" Relationship="Self.FK_ThesisDefenceCommision_Teacher_ThesisDefenceCommision" FromRole="ThesisDefenceCommision" ToRole="CommisionTeacher" />
+          <NavigationProperty Name="Defence" Relationship="Self.FK_ThesisDefenceCommision_Defence" FromRole="ThesisDefenceCommision" ToRole="Defence" />
+          <NavigationProperty Name="Reviewer" Relationship="Self.FK_ThesisDefenceCommision_Reviewer" FromRole="ThesisDefenceCommision" ToRole="Reviewer" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK_ThesisDefenceCommision_Teacher" FromRole="ThesisDefenceCommision" ToRole="Teacher" />
+        </EntityType>
+        <EntityType Name="Vote">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TeacherID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DiplomaThesisTopicID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DiplomaThesisTopic" Relationship="Self.FK_Vote_DiplomaThesisTopic" FromRole="Vote" ToRole="DiplomaThesisTopic" />
+          <NavigationProperty Name="Teacher" Relationship="Self.FK_Vote_Teacher" FromRole="Vote" ToRole="Teacher" />
+        </EntityType>
+        <Association Name="FK_ThesisDefenceCommision_Teacher_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="CommisionTeacher" Type="Self.CommisionTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CommisionTeacher">
+              <PropertyRef Name="TeacherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThesisDefenceCommision_Teacher_ThesisDefenceCommision">
+          <End Role="ThesisDefenceCommision" Type="Self.ThesisDefenceCommision" Multiplicity="1" />
+          <End Role="CommisionTeacher" Type="Self.CommisionTeacher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ThesisDefenceCommision">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CommisionTeacher">
+              <PropertyRef Name="ThesisDefenceCommisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Defence_Student">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="Defence" Type="Self.Defence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Defence">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThesisDefenceCommision_Defence">
+          <End Role="ThesisDefenceCommision" Type="Self.ThesisDefenceCommision" Multiplicity="1" />
+          <End Role="Defence" Type="Self.Defence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ThesisDefenceCommision">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Defence">
+              <PropertyRef Name="ThesisDefenceCommisionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Review_DiplomaThesis">
+          <End Role="DiplomaThesis" Type="Self.DiplomaThesis" Multiplicity="1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiplomaThesis">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="DiplomaThesisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_DiplomaThesis">
+          <End Role="DiplomaThesis" Type="Self.DiplomaThesis" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiplomaThesis">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="DiplomaThesisID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiplomaThesisTopic_Reviewer">
+          <End Role="Reviewer" Type="Self.Reviewer" Multiplicity="0..1" />
+          <End Role="DiplomaThesisTopic" Type="Self.DiplomaThesisTopic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reviewer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DiplomaThesisTopic">
+              <PropertyRef Name="ReviewerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiplomaThesisTopic_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="DiplomaThesisTopic" Type="Self.DiplomaThesisTopic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DiplomaThesisTopic">
+              <PropertyRef Name="TeacherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_DiplomaThesisTopic">
+          <End Role="DiplomaThesisTopic" Type="Self.DiplomaThesisTopic" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiplomaThesisTopic">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="DiplomaThesisTopicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vote_DiplomaThesisTopic">
+          <End Role="DiplomaThesisTopic" Type="Self.DiplomaThesisTopic" Multiplicity="1" />
+          <End Role="Vote" Type="Self.Vote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiplomaThesisTopic">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vote">
+              <PropertyRef Name="DiplomaThesisTopicID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Review_Reviewer">
+          <End Role="Reviewer" Type="Self.Reviewer" Multiplicity="1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reviewer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="ReviewerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Review">
+          <End Role="Review" Type="Self.Review" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Review">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="ReviewID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThesisDefenceCommision_Reviewer">
+          <End Role="Reviewer" Type="Self.Reviewer" Multiplicity="0..1" />
+          <End Role="ThesisDefenceCommision" Type="Self.ThesisDefenceCommision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reviewer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThesisDefenceCommision">
+              <PropertyRef Name="ReviewerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Supervisor">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="SupervisorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ThesisDefenceCommision_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+          <End Role="ThesisDefenceCommision" Type="Self.ThesisDefenceCommision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThesisDefenceCommision">
+              <PropertyRef Name="SupervisorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vote_Teacher">
+          <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+          <End Role="Vote" Type="Self.Vote" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teacher">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Vote">
+              <PropertyRef Name="TeacherID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DiplomaThesisSystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CommisionTeacher" EntityType="Self.CommisionTeacher" />
+          <EntitySet Name="Defence" EntityType="Self.Defence" />
+          <EntitySet Name="DiplomaThesis" EntityType="Self.DiplomaThesis" />
+          <EntitySet Name="DiplomaThesisTopic" EntityType="Self.DiplomaThesisTopic" />
+          <EntitySet Name="Review" EntityType="Self.Review" />
+          <EntitySet Name="Reviewer" EntityType="Self.Reviewer" />
+          <EntitySet Name="Student" EntityType="Self.Student" />
+          <EntitySet Name="Teacher" EntityType="Self.Teacher" />
+          <EntitySet Name="ThesisDefenceCommision" EntityType="Self.ThesisDefenceCommision" />
+          <EntitySet Name="Vote" EntityType="Self.Vote" />
+          <AssociationSet Name="FK_ThesisDefenceCommision_Teacher_Teacher" Association="Self.FK_ThesisDefenceCommision_Teacher_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="CommisionTeacher" EntitySet="CommisionTeacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThesisDefenceCommision_Teacher_ThesisDefenceCommision" Association="Self.FK_ThesisDefenceCommision_Teacher_ThesisDefenceCommision">
+            <End Role="ThesisDefenceCommision" EntitySet="ThesisDefenceCommision" />
+            <End Role="CommisionTeacher" EntitySet="CommisionTeacher" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Defence_Student" Association="Self.FK_Defence_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="Defence" EntitySet="Defence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThesisDefenceCommision_Defence" Association="Self.FK_ThesisDefenceCommision_Defence">
+            <End Role="ThesisDefenceCommision" EntitySet="ThesisDefenceCommision" />
+            <End Role="Defence" EntitySet="Defence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Review_DiplomaThesis" Association="Self.FK_Review_DiplomaThesis">
+            <End Role="DiplomaThesis" EntitySet="DiplomaThesis" />
+            <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_DiplomaThesis" Association="Self.FK_Student_DiplomaThesis">
+            <End Role="DiplomaThesis" EntitySet="DiplomaThesis" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiplomaThesisTopic_Reviewer" Association="Self.FK_DiplomaThesisTopic_Reviewer">
+            <End Role="Reviewer" EntitySet="Reviewer" />
+            <End Role="DiplomaThesisTopic" EntitySet="DiplomaThesisTopic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiplomaThesisTopic_Teacher" Association="Self.FK_DiplomaThesisTopic_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="DiplomaThesisTopic" EntitySet="DiplomaThesisTopic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_DiplomaThesisTopic" Association="Self.FK_Student_DiplomaThesisTopic">
+            <End Role="DiplomaThesisTopic" EntitySet="DiplomaThesisTopic" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vote_DiplomaThesisTopic" Association="Self.FK_Vote_DiplomaThesisTopic">
+            <End Role="DiplomaThesisTopic" EntitySet="DiplomaThesisTopic" />
+            <End Role="Vote" EntitySet="Vote" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Review_Reviewer" Association="Self.FK_Review_Reviewer">
+            <End Role="Reviewer" EntitySet="Reviewer" />
+            <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Review" Association="Self.FK_Student_Review">
+            <End Role="Review" EntitySet="Review" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThesisDefenceCommision_Reviewer" Association="Self.FK_ThesisDefenceCommision_Reviewer">
+            <End Role="Reviewer" EntitySet="Reviewer" />
+            <End Role="ThesisDefenceCommision" EntitySet="ThesisDefenceCommision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Supervisor" Association="Self.FK_Student_Supervisor">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ThesisDefenceCommision_Teacher" Association="Self.FK_ThesisDefenceCommision_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="ThesisDefenceCommision" EntitySet="ThesisDefenceCommision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vote_Teacher" Association="Self.FK_Vote_Teacher">
+            <End Role="Teacher" EntitySet="Teacher" />
+            <End Role="Vote" EntitySet="Vote" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DiplomaThesisSystemModelStoreContainer" CdmEntityContainer="DiplomaThesisSystemEntities">
+          <EntitySetMapping Name="CommisionTeacher">
+            <EntityTypeMapping TypeName="DiplomaThesisSystemModel.CommisionTeacher">
+              <MappingFragment StoreEntitySet="CommisionTeacher">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ThesisDefenceCommisionID" ColumnName="ThesisDefenceCommisionID" />
+                <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Defence">
+            <EntityTypeMapping TypeName="DiplomaThesisSystemModel.Defence">
+              <MappingFragment StoreEntitySet="Defence">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="ThesisDefenceCommisionID" ColumnName="ThesisDefenceCommisionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DiplomaThesis">
+            <EntityTypeMapping TypeName="DiplomaThesisSystemModel.DiplomaThesis">
+              <MappingFragment StoreEntitySet="DiplomaThesis">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="NumberOfStudents" ColumnName="NumberOfStudents" />
+                <ScalarProperty Name="FieldOfStudy" ColumnName="FieldOfStudy" />
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
+                <ScalarProperty Name="Abstract" ColumnName="Abstract" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DiplomaThesisTopic">
+            <EntityTypeMapping TypeName="DiplomaThesisSystemModel.DiplomaThesisTopic">
+              <MappingFragment StoreEntitySet="DiplomaThesisTopic">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ReviewerID" ColumnName="ReviewerID" />
+                <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="NumberOfStudents" ColumnName="NumberOfStudents" />
+                <ScalarProperty Name="FieldOfStudy" ColumnName="FieldOfStudy" />
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
+                <ScalarProperty Name="Availability" ColumnName="Availability" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Review">
+            <EntityTypeMapping TypeName="DiplomaThesisSystemModel.Review">
+              <MappingFragment StoreEntitySet="Review">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DiplomaThesisID" ColumnName="DiplomaThesisID" />
+                <ScalarProperty Name="ReviewerID" ColumnName="ReviewerID" />
+                <ScalarProperty Name="Topic" ColumnName="Topic" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reviewer">
+            <EntityTypeMapping TypeName="DiplomaThesisSystemModel.Reviewer">
+              <MappingFragment StoreEntitySet="Reviewer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student">
+            <EntityTypeMapping TypeName="DiplomaThesisSystemModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ReviewID" ColumnName="ReviewID" />
+                <ScalarProperty Name="DiplomaThesisTopicID" ColumnName="DiplomaThesisTopicID" />
+                <ScalarProperty Name="SupervisorID" ColumnName="SupervisorID" />
+                <ScalarProperty Name="DiplomaThesisID" ColumnName="DiplomaThesisID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Semester" ColumnName="Semester" />
+                <ScalarProperty Name="FieldOfStudy" ColumnName="FieldOfStudy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teacher">
+            <EntityTypeMapping TypeName="DiplomaThesisSystemModel.Teacher">
+              <MappingFragment StoreEntitySet="Teacher">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="isSupervisor" ColumnName="isSupervisor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ThesisDefenceCommision">
+            <EntityTypeMapping TypeName="DiplomaThesisSystemModel.ThesisDefenceCommision">
+              <MappingFragment StoreEntitySet="ThesisDefenceCommision">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SupervisorID" ColumnName="SupervisorID" />
+                <ScalarProperty Name="ReviewerID" ColumnName="ReviewerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vote">
+            <EntityTypeMapping TypeName="DiplomaThesisSystemModel.Vote">
+              <MappingFragment StoreEntitySet="Vote">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
+                <ScalarProperty Name="DiplomaThesisTopicID" ColumnName="DiplomaThesisTopicID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="27083ac890094de3995fd2ecd9df786e" Name="Diagram1">
+        <EntityTypeShape EntityType="DiplomaThesisSystemModel.CommisionTeacher" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomaThesisSystemModel.Defence" Width="1.5" PointX="10.5" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomaThesisSystemModel.DiplomaThesis" Width="1.5" PointX="6" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomaThesisSystemModel.DiplomaThesisTopic" Width="1.5" PointX="6" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomaThesisSystemModel.Review" Width="1.5" PointX="6" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomaThesisSystemModel.Reviewer" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomaThesisSystemModel.Student" Width="1.5" PointX="8.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomaThesisSystemModel.Teacher" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomaThesisSystemModel.ThesisDefenceCommision" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DiplomaThesisSystemModel.Vote" Width="1.5" PointX="11.25" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="DiplomaThesisSystemModel.FK_ThesisDefenceCommision_Teacher_Teacher" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomaThesisSystemModel.FK_ThesisDefenceCommision_Teacher_ThesisDefenceCommision" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomaThesisSystemModel.FK_Defence_Student" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomaThesisSystemModel.FK_ThesisDefenceCommision_Defence" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomaThesisSystemModel.FK_Review_DiplomaThesis" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomaThesisSystemModel.FK_Student_DiplomaThesis" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomaThesisSystemModel.FK_DiplomaThesisTopic_Reviewer" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomaThesisSystemModel.FK_DiplomaThesisTopic_Teacher" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomaThesisSystemModel.FK_Student_DiplomaThesisTopic" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomaThesisSystemModel.FK_Vote_DiplomaThesisTopic" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomaThesisSystemModel.FK_Review_Reviewer" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomaThesisSystemModel.FK_Student_Review" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomaThesisSystemModel.FK_ThesisDefenceCommision_Reviewer" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomaThesisSystemModel.FK_Student_Supervisor" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomaThesisSystemModel.FK_ThesisDefenceCommision_Teacher" ManuallyRouted="false" />
+        <AssociationConnector Association="DiplomaThesisSystemModel.FK_Vote_Teacher" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
