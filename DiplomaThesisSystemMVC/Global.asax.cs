@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DiplomaThesisSystemMVC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +14,11 @@ namespace DiplomaThesisSystemMVC
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+
+            ViewEngines.Engines.Clear();
+            var viewEngine = new CustomViewLocationRazorViewEngine();
+            ViewEngines.Engines.Add(viewEngine);
+
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
