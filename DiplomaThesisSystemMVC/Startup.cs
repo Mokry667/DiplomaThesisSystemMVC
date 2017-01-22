@@ -16,10 +16,10 @@ namespace DiplomaThesisSystemMVC
             // uncomment to populate database
             // populateRoles();
             // populateUsers();
-            //setSupervisor("Degeorge", 246194);
-            //setSupervisor("Degeorge", 592194);
-            //setSupervisor("Mcintire", 246821);
-            //setSupervisor("Degeorge", 582910);
+            // setSupervisor("Degeorge", 246194);
+            // setSupervisor("Degeorge", 592194);
+            // setSupervisor("Mcintire", 246821);
+            // setSupervisor("Degeorge", 582910);
         }
 
         private void populateRoles()
@@ -110,6 +110,7 @@ namespace DiplomaThesisSystemMVC
         {
             ApplicationDbContext context = new ApplicationDbContext();
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
             if (userManager.Find(username, password) == null){
 
                 var user = new ApplicationUser();
@@ -120,8 +121,7 @@ namespace DiplomaThesisSystemMVC
 
                 if (chkUser.Succeeded)
                 {
-                    var result1 = userManager.AddToRole(user.Id, roleName);
-
+                    userManager.AddToRole(user.Id, roleName);
                 }
             } 
         }

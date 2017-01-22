@@ -269,9 +269,12 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Common\Login\pwr.jpg" />
     <Content Include="Content\pwr.png" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -305,6 +308,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Common\Login\Index.cshtml" />
     <Content Include="Views\Layouts\_GuestLayout.cshtml" />
+    <Content Include="Views\Layouts\_StudentLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
