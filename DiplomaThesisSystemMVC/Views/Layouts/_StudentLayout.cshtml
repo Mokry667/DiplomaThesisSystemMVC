@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -16,16 +15,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Main Page", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Stud1")</li>
-                    <li>@Html.ActionLink("About", "About", "Stud2")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Stud3")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Stud4")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Stud5")</li>
+                    <li>@Html.ActionLink("My Profile", "Index", "EmptyPage")</li>
+                    <li>@Html.ActionLink("Grades", "Index", "EmptyPage")</li>
+                    <li>@Html.ActionLink("Diploma Thesis", "Index", "EmptyPage")</li>
+                    <li>@Html.ActionLink("More", "Index", "EmptyPage")</li>
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                 </ul>
+                @Html.Partial("_LogoPartial")
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
