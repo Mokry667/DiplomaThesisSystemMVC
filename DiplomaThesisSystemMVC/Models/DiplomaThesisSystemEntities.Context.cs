@@ -13,10 +13,10 @@ namespace DiplomaThesisSystemMVC.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DiplomaThesisSystemEntities : DbContext
+    public partial class DiplomaThesisSystemDB : DbContext
     {
-        public DiplomaThesisSystemEntities()
-            : base("name=DiplomaThesisSystemEntities")
+        public DiplomaThesisSystemDB()
+            : base("name=DiplomaThesisSystemDB")
         {
         }
     

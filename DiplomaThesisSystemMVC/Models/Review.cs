@@ -24,8 +24,8 @@ namespace DiplomaThesisSystemMVC.Models
         public int DiplomaThesisID { get; set; }
         public string ReviewerID { get; set; }
         public string Topic { get; set; }
-        public Nullable<int> Grade { get; set; }
         public string Content { get; set; }
+        public Nullable<int> Grade { get; set; }
     
         public virtual DiplomaThesis DiplomaThesis { get; set; }
         public virtual Reviewer Reviewer { get; set; }

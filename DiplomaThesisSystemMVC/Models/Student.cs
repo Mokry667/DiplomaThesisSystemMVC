@@ -28,6 +28,7 @@ namespace DiplomaThesisSystemMVC.Models
         public int StudentID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string Degree { get; set; }
         public Nullable<int> Semester { get; set; }
         public string FieldOfStudy { get; set; }
     

@@ -50,19 +50,19 @@ namespace DiplomaThesisSystemMVC
 
             //Students
             addNewUser("student1@pwr.edu.pl", "password", "student1@pwr.edu.pl", "Student");
-            addStudent("student1@pwr.edu.pl", 246194, "Teodoro", "Steinhauer", 7, "Computer Science");
+            addStudent("student1@pwr.edu.pl", 246194, "Teodoro", "Steinhauer", "Bachelor", 7, "Computer Science");
 
             addNewUser("student2@pwr.edu.pl", "password", "student2@pwr.edu.pl", "Student");
-            addStudent("student2@pwr.edu.pl", 592194, "Wrennie", "Shieber", 3, "Computer Science");
+            addStudent("student2@pwr.edu.pl", 592194, "Wrennie", "Shieber", "Master", 3, "Computer Science");
 
             addNewUser("student3@pwr.edu.pl", "password", "student3@pwr.edu.pl", "Student");
-            addStudent("student3@pwr.edu.pl", 582910, "Ives", "Callahan", 6, "Computer Science");
+            addStudent("student3@pwr.edu.pl", 582910, "Ives", "Callahan", "Bachelor", 6, "Computer Science");
 
             addNewUser("student4@pwr.edu.pl", "password", "student4@pwr.edu.pl", "Student");
-            addStudent("student4@pwr.edu.pl", 482014, "Wendye", "Ozols", 5, "Electronics");
+            addStudent("student4@pwr.edu.pl", 482014, "Wendye", "Ozols", "Bachelor", 6, "Electronics");
 
             addNewUser("student5@pwr.edu.pl", "password", "student5@pwr.edu.pl", "Student");
-            addStudent("student5@pwr.edu.pl", 246821, "Kyle", "Chiang", 6, "Electronics");
+            addStudent("student5@pwr.edu.pl", 246821, "Kyle", "Chiang", "Bachelor", 6, "Electronics");
 
             //Reviewers
             addNewUser("reviewer1@pwr.edu.pl", "password", "reviewer1@pwr.edu.pl", "Reviewer");
@@ -133,7 +133,7 @@ namespace DiplomaThesisSystemMVC
             ApplicationUser currentUser = userManager.FindByName(username);
             string userID = currentUser.Id;
 
-            var entities = new DiplomaThesisSystemEntities();
+            var entities = new DiplomaThesisSystemDB();
             if (entities.Teacher.Find(userID) == null)
             {
                 Teacher newTeacher = new Teacher();
@@ -156,7 +156,7 @@ namespace DiplomaThesisSystemMVC
             ApplicationUser currentUser = userManager.FindByName(username);
             string userID = currentUser.Id;
 
-            var entities = new DiplomaThesisSystemEntities();
+            var entities = new DiplomaThesisSystemDB();
             if (entities.Teacher.Find(userID) == null)
             {
                 Teacher newTeacher = new Teacher();
@@ -171,14 +171,14 @@ namespace DiplomaThesisSystemMVC
             }
         }
 
-        private void addStudent(string username, int studentID, string firstName, string lastName, int semester, string fieldOfStudy)
+        private void addStudent(string username, int studentID, string firstName, string lastName, string degree, int semester, string fieldOfStudy)
         {
             ApplicationDbContext context = new ApplicationDbContext();
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             ApplicationUser currentUser = userManager.FindByName(username);
             string userID = currentUser.Id;
 
-            var entities = new DiplomaThesisSystemEntities();
+            var entities = new DiplomaThesisSystemDB();
             if (entities.Student.Find(userID) == null)
             {
                 Student newStudent = new Student();
@@ -186,6 +186,7 @@ namespace DiplomaThesisSystemMVC
                 newStudent.StudentID = studentID;
                 newStudent.FirstName = firstName;
                 newStudent.LastName = lastName;
+                newStudent.Degree = degree;
                 newStudent.Semester = semester;
                 newStudent.FieldOfStudy = fieldOfStudy;
                 entities.Student.Add(newStudent);
@@ -200,7 +201,7 @@ namespace DiplomaThesisSystemMVC
             ApplicationUser currentUser = userManager.FindByName(username);
             string userID = currentUser.Id;
 
-            var entities = new DiplomaThesisSystemEntities();
+            var entities = new DiplomaThesisSystemDB();
             if (entities.Reviewer.Find(userID) == null)
             {
                 Reviewer newReviewer = new Reviewer();
@@ -215,7 +216,7 @@ namespace DiplomaThesisSystemMVC
         
         private void setSupervisor(string superLastName, int studentID)
         {
-            var entities = new DiplomaThesisSystemEntities();
+            var entities = new DiplomaThesisSystemDB();
             Teacher supervisor = entities.Teacher.Single(Teacher => Teacher.LastName == superLastName);
             Student student = entities.Student.Single(Student => Student.StudentID == studentID);
             student.SupervisorID = supervisor.ID;

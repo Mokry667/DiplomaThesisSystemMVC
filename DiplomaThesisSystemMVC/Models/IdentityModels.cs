@@ -31,7 +31,7 @@ namespace DiplomaThesisSystemMVC.Models
             return new ApplicationDbContext();
         }
 
-        public static implicit operator ApplicationDbContext(DiplomaThesisSystemEntities v)
+        public static implicit operator ApplicationDbContext(DiplomaThesisSystemDB v)
         {
             throw new NotImplementedException();
         }

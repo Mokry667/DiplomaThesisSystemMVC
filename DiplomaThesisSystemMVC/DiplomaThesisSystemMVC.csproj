@@ -178,52 +178,52 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CommisionTeacher.cs">
-      <DependentUpon>DiplomaThesisSystemDB.tt</DependentUpon>
+      <DependentUpon>DiplomaThesisSystemEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CustomViewEngine.cs" />
     <Compile Include="Models\Defence.cs">
-      <DependentUpon>DiplomaThesisSystemDB.tt</DependentUpon>
+      <DependentUpon>DiplomaThesisSystemEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DiplomaThesis.cs">
-      <DependentUpon>DiplomaThesisSystemDB.tt</DependentUpon>
+      <DependentUpon>DiplomaThesisSystemEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DiplomaThesisSystemDB.Context.cs">
+    <Compile Include="Models\DiplomaThesisSystemEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DiplomaThesisSystemDB.Context.tt</DependentUpon>
+      <DependentUpon>DiplomaThesisSystemEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DiplomaThesisSystemDB.cs">
+    <Compile Include="Models\DiplomaThesisSystemEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DiplomaThesisSystemDB.tt</DependentUpon>
+      <DependentUpon>DiplomaThesisSystemEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DiplomaThesisSystemDB.Designer.cs">
+    <Compile Include="Models\DiplomaThesisSystemEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DiplomaThesisSystemDB.edmx</DependentUpon>
+      <DependentUpon>DiplomaThesisSystemEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\DiplomaThesisTopic.cs">
-      <DependentUpon>DiplomaThesisSystemDB.tt</DependentUpon>
+      <DependentUpon>DiplomaThesisSystemEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Review.cs">
-      <DependentUpon>DiplomaThesisSystemDB.tt</DependentUpon>
+      <DependentUpon>DiplomaThesisSystemEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Reviewer.cs">
-      <DependentUpon>DiplomaThesisSystemDB.tt</DependentUpon>
+      <DependentUpon>DiplomaThesisSystemEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Student.cs">
-      <DependentUpon>DiplomaThesisSystemDB.tt</DependentUpon>
+      <DependentUpon>DiplomaThesisSystemEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Teacher.cs">
-      <DependentUpon>DiplomaThesisSystemDB.tt</DependentUpon>
+      <DependentUpon>DiplomaThesisSystemEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ThesisDefenceCommision.cs">
-      <DependentUpon>DiplomaThesisSystemDB.tt</DependentUpon>
+      <DependentUpon>DiplomaThesisSystemEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vote.cs">
-      <DependentUpon>DiplomaThesisSystemDB.tt</DependentUpon>
+      <DependentUpon>DiplomaThesisSystemEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -236,24 +236,24 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\DiplomaThesisSystemDB.Context.tt">
+    <Content Include="Models\DiplomaThesisSystemEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DiplomaThesisSystemDB.edmx</DependentUpon>
-      <LastGenOutput>DiplomaThesisSystemDB.Context.cs</LastGenOutput>
+      <DependentUpon>DiplomaThesisSystemEntities.edmx</DependentUpon>
+      <LastGenOutput>DiplomaThesisSystemEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\DiplomaThesisSystemDB.tt">
+    <Content Include="Models\DiplomaThesisSystemEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DiplomaThesisSystemDB.edmx</DependentUpon>
-      <LastGenOutput>DiplomaThesisSystemDB.cs</LastGenOutput>
+      <DependentUpon>DiplomaThesisSystemEntities.edmx</DependentUpon>
+      <LastGenOutput>DiplomaThesisSystemEntities.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\DiplomaThesisSystemDB.edmx">
+    <EntityDeploy Include="Models\DiplomaThesisSystemEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DiplomaThesisSystemDB.Designer.cs</LastGenOutput>
+      <LastGenOutput>DiplomaThesisSystemEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\DiplomaThesisSystemDB.edmx.diagram">
-      <DependentUpon>DiplomaThesisSystemDB.edmx</DependentUpon>
+    <Content Include="Models\DiplomaThesisSystemEntities.edmx.diagram">
+      <DependentUpon>DiplomaThesisSystemEntities.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

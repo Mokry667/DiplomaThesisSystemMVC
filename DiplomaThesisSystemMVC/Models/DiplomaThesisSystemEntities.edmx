@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DiplomaThesisSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DiplomaThesisSystemEntities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CommisionTeacher">
           <Key>
             <PropertyRef Name="ID" />
@@ -56,8 +56,8 @@
           <Property Name="DiplomaThesisID" Type="int" Nullable="false" />
           <Property Name="ReviewerID" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Topic" Type="nvarchar" MaxLength="255" />
-          <Property Name="Grade" Type="int" />
           <Property Name="Content" Type="nvarchar" MaxLength="255" />
+          <Property Name="Grade" Type="int" />
         </EntityType>
         <EntityType Name="Reviewer">
           <Key>
@@ -80,6 +80,7 @@
           <Property Name="StudentID" Type="int" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="255" />
           <Property Name="LastName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Degree" Type="nvarchar" MaxLength="255" />
           <Property Name="Semester" Type="int" />
           <Property Name="FieldOfStudy" Type="nvarchar" MaxLength="255" />
         </EntityType>
@@ -302,7 +303,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DiplomaThesisSystemModelStoreContainer">
+        <EntityContainer Name="DiplomaThesisSystemEntitiesStoreContainer">
           <EntitySet Name="CommisionTeacher" EntityType="Self.CommisionTeacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Defence" EntityType="Self.Defence" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiplomaThesis" EntityType="Self.DiplomaThesis" Schema="dbo" store:Type="Tables" />
@@ -382,7 +383,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="DiplomaThesisSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="DiplomaThesisSystemEntities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="CommisionTeacher">
           <Key>
             <PropertyRef Name="ID" />
@@ -444,8 +445,8 @@
           <Property Name="DiplomaThesisID" Type="Int32" Nullable="false" />
           <Property Name="ReviewerID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Topic" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="Grade" Type="Int32" />
           <Property Name="Content" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Grade" Type="Int32" />
           <NavigationProperty Name="DiplomaThesis" Relationship="Self.FK_Review_DiplomaThesis" FromRole="Review" ToRole="DiplomaThesis" />
           <NavigationProperty Name="Reviewer" Relationship="Self.FK_Review_Reviewer" FromRole="Review" ToRole="Reviewer" />
           <NavigationProperty Name="Student" Relationship="Self.FK_Student_Review" FromRole="Review" ToRole="Student" />
@@ -474,6 +475,7 @@
           <Property Name="StudentID" Type="Int32" Nullable="false" />
           <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Degree" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Semester" Type="Int32" />
           <Property Name="FieldOfStudy" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Defence" Relationship="Self.FK_Defence_Student" FromRole="Student" ToRole="Defence" />
@@ -712,7 +714,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DiplomaThesisSystemEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DiplomaThesisSystemDB" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CommisionTeacher" EntityType="Self.CommisionTeacher" />
           <EntitySet Name="Defence" EntityType="Self.Defence" />
           <EntitySet Name="DiplomaThesis" EntityType="Self.DiplomaThesis" />
@@ -793,9 +795,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DiplomaThesisSystemModelStoreContainer" CdmEntityContainer="DiplomaThesisSystemEntities">
+        <EntityContainerMapping StorageEntityContainer="DiplomaThesisSystemEntitiesStoreContainer" CdmEntityContainer="DiplomaThesisSystemDB">
           <EntitySetMapping Name="CommisionTeacher">
-            <EntityTypeMapping TypeName="DiplomaThesisSystemModel.CommisionTeacher">
+            <EntityTypeMapping TypeName="DiplomaThesisSystemEntities.CommisionTeacher">
               <MappingFragment StoreEntitySet="CommisionTeacher">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ThesisDefenceCommisionID" ColumnName="ThesisDefenceCommisionID" />
@@ -804,7 +806,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Defence">
-            <EntityTypeMapping TypeName="DiplomaThesisSystemModel.Defence">
+            <EntityTypeMapping TypeName="DiplomaThesisSystemEntities.Defence">
               <MappingFragment StoreEntitySet="Defence">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
@@ -813,7 +815,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DiplomaThesis">
-            <EntityTypeMapping TypeName="DiplomaThesisSystemModel.DiplomaThesis">
+            <EntityTypeMapping TypeName="DiplomaThesisSystemEntities.DiplomaThesis">
               <MappingFragment StoreEntitySet="DiplomaThesis">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -826,7 +828,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DiplomaThesisTopic">
-            <EntityTypeMapping TypeName="DiplomaThesisSystemModel.DiplomaThesisTopic">
+            <EntityTypeMapping TypeName="DiplomaThesisSystemEntities.DiplomaThesisTopic">
               <MappingFragment StoreEntitySet="DiplomaThesisTopic">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ReviewerID" ColumnName="ReviewerID" />
@@ -842,19 +844,19 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Review">
-            <EntityTypeMapping TypeName="DiplomaThesisSystemModel.Review">
+            <EntityTypeMapping TypeName="DiplomaThesisSystemEntities.Review">
               <MappingFragment StoreEntitySet="Review">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="DiplomaThesisID" ColumnName="DiplomaThesisID" />
                 <ScalarProperty Name="ReviewerID" ColumnName="ReviewerID" />
                 <ScalarProperty Name="Topic" ColumnName="Topic" />
-                <ScalarProperty Name="Grade" ColumnName="Grade" />
                 <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Grade" ColumnName="Grade" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Reviewer">
-            <EntityTypeMapping TypeName="DiplomaThesisSystemModel.Reviewer">
+            <EntityTypeMapping TypeName="DiplomaThesisSystemEntities.Reviewer">
               <MappingFragment StoreEntitySet="Reviewer">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -864,7 +866,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Student">
-            <EntityTypeMapping TypeName="DiplomaThesisSystemModel.Student">
+            <EntityTypeMapping TypeName="DiplomaThesisSystemEntities.Student">
               <MappingFragment StoreEntitySet="Student">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="ReviewID" ColumnName="ReviewID" />
@@ -874,13 +876,14 @@
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
                 <ScalarProperty Name="Semester" ColumnName="Semester" />
                 <ScalarProperty Name="FieldOfStudy" ColumnName="FieldOfStudy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Teacher">
-            <EntityTypeMapping TypeName="DiplomaThesisSystemModel.Teacher">
+            <EntityTypeMapping TypeName="DiplomaThesisSystemEntities.Teacher">
               <MappingFragment StoreEntitySet="Teacher">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -892,7 +895,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ThesisDefenceCommision">
-            <EntityTypeMapping TypeName="DiplomaThesisSystemModel.ThesisDefenceCommision">
+            <EntityTypeMapping TypeName="DiplomaThesisSystemEntities.ThesisDefenceCommision">
               <MappingFragment StoreEntitySet="ThesisDefenceCommision">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="SupervisorID" ColumnName="SupervisorID" />
@@ -901,7 +904,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Vote">
-            <EntityTypeMapping TypeName="DiplomaThesisSystemModel.Vote">
+            <EntityTypeMapping TypeName="DiplomaThesisSystemEntities.Vote">
               <MappingFragment StoreEntitySet="Vote">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="TeacherID" ColumnName="TeacherID" />
