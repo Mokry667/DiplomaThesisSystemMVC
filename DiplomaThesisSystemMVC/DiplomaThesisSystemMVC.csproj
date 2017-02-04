@@ -313,18 +313,17 @@
     <Content Include="Views\Shared\_LogoPartial.cshtml" />
     <Content Include="Views\Layouts\_TeacherLayout.cshtml" />
     <Content Include="Views\Shared\Login\Invalid.cshtml" />
-    <Content Include="Views\SubmitTopic\Create.cshtml" />
-    <Content Include="Views\SubmitTopic\Delete.cshtml" />
-    <Content Include="Views\SubmitTopic\Details.cshtml" />
-    <Content Include="Views\SubmitTopic\Edit.cshtml" />
-    <Content Include="Views\SubmitTopic\Index.cshtml" />
-    <Content Include="Views\SubmitTopic\_SubmitTopicPartial.cshtml" />
+    <Content Include="Views\Tabs\SubmitTopic\Create.cshtml" />
+    <Content Include="Views\Tabs\SubmitTopic\Delete.cshtml" />
+    <Content Include="Views\Tabs\SubmitTopic\Details.cshtml" />
+    <Content Include="Views\Tabs\SubmitTopic\Edit.cshtml" />
+    <Content Include="Views\Tabs\SubmitTopic\Index.cshtml" />
+    <Content Include="Views\Tabs\SubmitTopic\_SubmitTopicPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\Database_Access\" />
     <Folder Include="Controllers\Message_System\" />
-    <Folder Include="Views\Tabs\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
