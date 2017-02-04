@@ -13,5 +13,10 @@ namespace DiplomaThesisSystemMVC.Controllers.Account_Management
         {
             return View();
         }
+
+        public ActionResult Invalid()
+        {
+            return View();
+        }
     }
 }
