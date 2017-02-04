@@ -171,6 +171,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Account_Management\LoginController.cs" />
+    <Compile Include="Controllers\Diploma_Thesis_Management\SubmitTopicController.cs" />
     <Compile Include="Controllers\EmptyPageController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -312,11 +313,16 @@
     <Content Include="Views\Shared\_LogoPartial.cshtml" />
     <Content Include="Views\Layouts\_TeacherLayout.cshtml" />
     <Content Include="Views\Shared\Login\Invalid.cshtml" />
+    <Content Include="Views\SubmitTopic\Create.cshtml" />
+    <Content Include="Views\SubmitTopic\Delete.cshtml" />
+    <Content Include="Views\SubmitTopic\Details.cshtml" />
+    <Content Include="Views\SubmitTopic\Edit.cshtml" />
+    <Content Include="Views\SubmitTopic\Index.cshtml" />
+    <Content Include="Views\SubmitTopic\_SubmitTopicPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\Database_Access\" />
-    <Folder Include="Controllers\Diploma_Thesis_Management\" />
     <Folder Include="Controllers\Message_System\" />
     <Folder Include="Views\Tabs\" />
   </ItemGroup>
