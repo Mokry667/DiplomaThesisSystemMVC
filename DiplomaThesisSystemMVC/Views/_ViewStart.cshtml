@@ -1,3 +1,26 @@
 ﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    if (HttpContext.Current.User.IsInRole("Student"))
+    {
+        Layout = "~/Views/Layouts/_StudentLayout.cshtml";
+    }
+
+    else if (HttpContext.Current.User.IsInRole("Teacher"))
+    {
+        Layout = "~/Views/Layouts/_TeacherLayout.cshtml";
+    }
+
+    else if (HttpContext.Current.User.IsInRole("FacultyCouncilMember"))
+    {
+        Layout = "~/Views/Layouts/_FacultyCouncilMemberLayout.cshtml";
+    }
+
+    else if (HttpContext.Current.User.IsInRole("Supervisor"))
+    {
+        Layout = "~/Views/Layouts/_SupervisorLayout.cshtml";
+    }
+
+    else if (HttpContext.Current.User.IsInRole("Reviewer"))
+    {
+        Layout = "~/Views/Layouts/_ReviewerLayout.cshtml";
+    }
 }
