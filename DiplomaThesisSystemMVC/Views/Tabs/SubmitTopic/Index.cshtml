@@ -55,5 +55,14 @@
 
     @Html.Partial("_SubmitTopicPartial", new DiplomaThesisSystemMVC.Models.DiplomaThesisTopic())
 
+    @if (null != TempData["Message"])
+    {
+        <script type="text/javascript">
+        alert("@TempData["Message"]");
+        </script>
+    }
+
+
+
 </body>
 </html>

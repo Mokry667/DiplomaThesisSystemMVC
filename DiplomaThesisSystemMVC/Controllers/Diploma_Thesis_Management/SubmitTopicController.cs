@@ -18,6 +18,11 @@ namespace DiplomaThesisSystemMVC.Controllers.Diploma_Thesis_Management
         // GET: SubmitTopic
         public ActionResult Index()
         {
+            // if table is empty
+            if (!db.DiplomaThesisTopic.Any())
+            {
+                TempData["Message"] = "List is empty";
+            }
             var diplomaThesisTopic = db.DiplomaThesisTopic.Include(d => d.Reviewer).Include(d => d.Teacher);
             return View(diplomaThesisTopic.ToList());
         }
@@ -44,10 +49,19 @@ namespace DiplomaThesisSystemMVC.Controllers.Diploma_Thesis_Management
 
             //add some checks
 
+
             if (ModelState.IsValid)
             {
+                string name = diplomaThesisTopic.Name;
+                if (db.DiplomaThesisTopic.Any(topic => topic.Name == name))
+                {
+                    TempData["Message"] = "Topic is already on a list";
+                    return RedirectToAction("Index");
+                }
+
                 db.DiplomaThesisTopic.Add(diplomaThesisTopic);
                 db.SaveChanges();
+                TempData["Message"] = "Topic added successfully";
                 return RedirectToAction("Index");
             }
             return View(diplomaThesisTopic);
