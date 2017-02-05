@@ -318,6 +318,8 @@
     <Content Include="Views\Tabs\SubmitTopic\_SubmitTopicPartial.cshtml" />
     <Content Include="Views\Tabs\BrowseSupervisedStudents\Index.cshtml" />
     <Content Include="Views\Layouts\_SupervisorLayout.cshtml" />
+    <Content Include="Views\Layouts\_ReviewerLayout.cshtml" />
+    <Content Include="Views\Layouts\_FacultyCouncilMemberLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
