@@ -313,10 +313,6 @@
     <Content Include="Views\Shared\_LogoPartial.cshtml" />
     <Content Include="Views\Layouts\_TeacherLayout.cshtml" />
     <Content Include="Views\Shared\Login\Invalid.cshtml" />
-    <Content Include="Views\Tabs\SubmitTopic\Create.cshtml" />
-    <Content Include="Views\Tabs\SubmitTopic\Delete.cshtml" />
-    <Content Include="Views\Tabs\SubmitTopic\Details.cshtml" />
-    <Content Include="Views\Tabs\SubmitTopic\Edit.cshtml" />
     <Content Include="Views\Tabs\SubmitTopic\Index.cshtml" />
     <Content Include="Views\Tabs\SubmitTopic\_SubmitTopicPartial.cshtml" />
   </ItemGroup>
