@@ -21,9 +21,9 @@ namespace DiplomaThesisSystemMVC.Controllers.Diploma_Thesis_Management
             string supervisorID = User.Identity.GetUserId();
             var student = db.Student.Include(s => s.DiplomaThesis).Include(s => s.DiplomaThesisTopic).Include(s => s.Review).Include(s => s.Teacher).Where(s => s.SupervisorID == supervisorID);
             // check if blank is working
-            if (student == null){
+            if (!student.Any()){
                 TempData["Message"] = "List is empty";
-                return View();
+                return View(student.ToList());
             }
             return View(student.ToList());
         }

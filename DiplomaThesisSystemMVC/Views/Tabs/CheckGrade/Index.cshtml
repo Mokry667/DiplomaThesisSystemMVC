@@ -1,0 +1,53 @@
+﻿@model IEnumerable<DiplomaThesisSystemMVC.Models.Student>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <table class="table">
+        <tr>
+            <th>
+                Title of Diploma Thesis
+            </th>
+            <th>
+                Grade
+            </th>
+            <th>
+                Name of the reviewer
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiplomaThesis.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Review.Grade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Review.Reviewer.FirstName)
+                @Html.DisplayFor(modelItem => item.Review.Reviewer.LastName)
+            </td>
+            <td>
+                @Html.ActionLink("Review", "CheckReview", new { id = item.ReviewID })
+            </td>
+        </tr>
+    }
+    
+    </table>
+
+    @if (null != TempData["Message"])
+    {
+        <script type="text/javascript">
+        alert("@TempData["Message"]");
+        </script>
+    }
+
+</body>
+</html>

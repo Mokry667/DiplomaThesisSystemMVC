@@ -22,6 +22,10 @@ namespace DiplomaThesisSystemMVC.Controllers.Diploma_Thesis_Management
         {
             statusList = new List<int>();
             var diplomaThesisTopic = db.DiplomaThesisTopic.Include(d => d.Reviewer).Include(d => d.Teacher);
+            if (diplomaThesisTopic == null)
+            {
+                TempData["Message"] = "Diploma Thesis topic pool is empty";
+            }
 
             return View(diplomaThesisTopic.ToList());
         }

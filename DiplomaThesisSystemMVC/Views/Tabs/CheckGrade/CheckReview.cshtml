@@ -1,0 +1,41 @@
+﻿@model DiplomaThesisSystemMVC.Models.Review
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Review of @Html.DisplayFor(model => model.Topic)</h4>
+        <hr />
+        <dl class="dl-horizontal">
+
+            <dd>
+                @Html.DisplayFor(model => model.Content)
+            </dd>
+
+        </dl>
+
+    </div>
+
+    <dl class="dl-horizontal">
+
+        <dd>
+            @Html.DisplayFor(model => model.Reviewer.FirstName)
+            @Html.DisplayFor(model => model.Reviewer.LastName)
+        </dd>
+
+    </dl>
+
+    <div class="form-group">
+        <div class="col-md-offset-11 col-md-1">
+            @Html.ActionLink("Go Back", "Index", "CheckGrade", new { @class = "btn btn-default" })
+        </div>
+    </div>
+
+</body>
+</html>
+

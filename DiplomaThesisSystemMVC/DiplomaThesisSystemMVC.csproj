@@ -173,6 +173,7 @@
     <Compile Include="Controllers\Account_Management\LoginController.cs" />
     <Compile Include="Controllers\Diploma_Thesis_Management\BrowseSupervisedStudentsController.cs" />
     <Compile Include="Controllers\Diploma_Thesis_Management\BrowseTopicController.cs" />
+    <Compile Include="Controllers\Diploma_Thesis_Management\CheckGradeController.cs" />
     <Compile Include="Controllers\Diploma_Thesis_Management\SubmitTopicController.cs" />
     <Compile Include="Controllers\Diploma_Thesis_Management\VoteTopicController.cs" />
     <Compile Include="Controllers\Website\EmptyPageController.cs" />
@@ -307,6 +308,8 @@
     <Content Include="Views\Tabs\BrowseTopic\Filter.cshtml" />
     <Content Include="Views\Tabs\VoteTopic\Index.cshtml" />
     <Content Include="Views\Tabs\VoteTopic\VotedIndex.cshtml" />
+    <Content Include="Views\Tabs\CheckGrade\Index.cshtml" />
+    <Content Include="Views\Tabs\CheckGrade\CheckReview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
