@@ -1,0 +1,72 @@
+﻿
+@model IEnumerable<DiplomaThesisSystemMVC.Models.DiplomaThesisTopic>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Filter</title>
+</head>
+<body>
+    @Html.Partial("_FilterPartial", new DiplomaThesisSystemMVC.Models.DiplomaThesisTopic())
+
+    <table class="table" style="width: 100%;">
+        <tr>
+            <th style="width: 15%;">
+                Diploma Thesis Topic
+            </th>
+            <th style="width: 30%;">
+                Description
+            </th>
+            <th style="width: 5%;">
+                No of Students
+            </th>
+            <th style="width: 10%;">
+                Field of Study
+            </th>
+            <th style="width: 10%;">
+                Degree
+            </th>
+            <th style="width: 10%;">
+                Availability
+            </th>
+            <th style="width: 20%;">
+                Supervisor
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfStudents)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FieldOfStudy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Degree)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Availability)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Teacher.Title)
+                    @Html.DisplayFor(modelItem => item.Teacher.FirstName)
+                    @Html.DisplayFor(modelItem => item.Teacher.LastName)
+                    @Html.DisplayFor(modelItem => item.Teacher.Department)
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

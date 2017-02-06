@@ -172,6 +172,7 @@
     <Compile Include="Controllers\Account_Management\AccountController.cs" />
     <Compile Include="Controllers\Account_Management\LoginController.cs" />
     <Compile Include="Controllers\Diploma_Thesis_Management\BrowseSupervisedStudentsController.cs" />
+    <Compile Include="Controllers\Diploma_Thesis_Management\BrowseTopicController.cs" />
     <Compile Include="Controllers\Diploma_Thesis_Management\SubmitTopicController.cs" />
     <Compile Include="Controllers\Website\EmptyPageController.cs" />
     <Compile Include="Controllers\Website\HomeController.cs" />
@@ -299,6 +300,10 @@
     <Content Include="Views\Layouts\_SupervisorLayout.cshtml" />
     <Content Include="Views\Layouts\_ReviewerLayout.cshtml" />
     <Content Include="Views\Layouts\_FacultyCouncilMemberLayout.cshtml" />
+    <Content Include="Views\Tabs\BrowseTopic\Create.cshtml" />
+    <Content Include="Views\Tabs\BrowseTopic\Index.cshtml" />
+    <Content Include="Views\Tabs\BrowseTopic\_FilterPartial.cshtml" />
+    <Content Include="Views\Tabs\BrowseTopic\Filter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
