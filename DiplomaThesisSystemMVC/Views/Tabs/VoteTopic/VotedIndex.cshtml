@@ -1,0 +1,76 @@
+﻿@model IEnumerable<DiplomaThesisSystemMVC.Models.DiplomaThesisTopic>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <table class="table" style ="width: 100%;">
+        <tr>
+            <th style ="width: 15%;">
+                Name
+            </th>
+            <th style ="width: 30%;">
+                Description
+            </th>
+            <th style ="width: 10%;">
+                Number of Students
+            </th>
+            <th style ="width: 15%;">
+                Field of Study
+            </th>
+            <th style ="width: 10%;">
+                Degree
+            </th>
+            <th style ="width: 10%;">
+                Status
+            </th>
+            <th style ="width: 10%;">
+                Vote
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfStudents)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FieldOfStudy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Degree)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @if (item.Status != "Accepted")
+                    {
+                        @Html.ActionLink("Accept", "Vote", new { id = item.ID })
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div class="form-group">
+        <div class="col-md-offset-11 col-md-1">
+            @Html.ActionLink("Confirm", "Confirm", "VoteTopic", new { @class = "btn btn-default" })
+        </div>
+    </div>
+
+</body>
+</html>

@@ -32,34 +32,6 @@ namespace DiplomaThesisSystemMVC.Controllers.Diploma_Thesis_Management
             return View(diplomaThesisTopic.ToList());
         }
 
-
-        // GET: BrowseTopic/Create
-        public ActionResult Create()
-        {
-            ViewBag.ReviewerID = new SelectList(db.Reviewer, "ID", "FirstName");
-            ViewBag.TeacherID = new SelectList(db.Teacher, "ID", "FirstName");
-            return View();
-        }
-
-        // POST: BrowseTopic/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,ReviewerID,TeacherID,Name,Description,NumberOfStudents,FieldOfStudy,Degree,Availability,Status")] DiplomaThesisTopic diplomaThesisTopic)
-        {
-            if (ModelState.IsValid)
-            {
-                db.DiplomaThesisTopic.Add(diplomaThesisTopic);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.ReviewerID = new SelectList(db.Reviewer, "ID", "FirstName", diplomaThesisTopic.ReviewerID);
-            ViewBag.TeacherID = new SelectList(db.Teacher, "ID", "FirstName", diplomaThesisTopic.TeacherID);
-            return View(diplomaThesisTopic);
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
 
