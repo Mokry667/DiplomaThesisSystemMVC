@@ -1,0 +1,39 @@
+﻿@model DiplomaThesisSystemMVC.Models.DiplomaThesis
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>@Html.DisplayFor(model => model.Name) - Abstract</h4>
+        <hr />
+        <dl class="dl-horizontal">
+
+            <dd>
+                @Html.DisplayFor(model => model.Abstract)
+            </dd>
+
+        </dl>
+
+    </div>
+
+    <dl class="dl-horizontal">
+
+        <dd>
+        </dd>
+
+    </dl>
+
+    <div class="form-group">
+        <div class="col-md-offset-11 col-md-1">
+            @Html.ActionLink("Go Back", "Index", "ReviewDiplomaThesis", new { @class = "btn btn-default" })
+        </div>
+    </div>
+
+</body>
+</html>
+

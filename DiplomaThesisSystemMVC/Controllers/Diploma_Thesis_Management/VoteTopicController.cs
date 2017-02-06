@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DiplomaThesisSystemMVC.Models;
+using Microsoft.AspNet.Identity;
 
 namespace DiplomaThesisSystemMVC.Controllers.Diploma_Thesis_Management
 {
@@ -72,6 +73,12 @@ namespace DiplomaThesisSystemMVC.Controllers.Diploma_Thesis_Management
             foreach (var id in statusList)
             {
                 DiplomaThesisTopic diplomaThesisTopic = db.DiplomaThesisTopic.Find(id);
+                Vote vote = new Vote();
+
+                vote.DiplomaThesisTopicID = diplomaThesisTopic.ID;
+                vote.TeacherID = User.Identity.GetUserId();
+                db.Vote.Add(vote);
+
                 diplomaThesisTopic.Status = "Accepted";
                 db.Entry(diplomaThesisTopic).State = EntityState.Modified;
                 db.SaveChanges();

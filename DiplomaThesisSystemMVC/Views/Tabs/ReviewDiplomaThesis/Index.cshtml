@@ -1,0 +1,96 @@
+﻿@model IEnumerable<DiplomaThesisSystemMVC.Models.Student>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+    <div class="row">
+        <div class="col-md-9"><h4>Diploma Thesis</h4></div>
+        <div class="col-md-3"><h4>Student</h4></div>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>
+                Diploma Thesis topic
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Number of students
+            </th>
+            <th>
+                Field of study
+            </th>
+            <th>
+                Degree
+            </th>
+            <th>
+                Student ID
+            </th>
+            <th>
+                First Name
+            </th>
+            <th>
+                Last Name
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiplomaThesis.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiplomaThesis.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiplomaThesis.NumberOfStudents)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiplomaThesis.FieldOfStudy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiplomaThesis.Degree)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.ActionLink("Abstract", "CheckAbstract", new { id = item.DiplomaThesisID })
+            </td>
+            <td>
+                @Html.ActionLink("Review", "WriteReview", new { id = item.DiplomaThesisID, studID = item.ID })
+            </td>
+
+        </tr>
+    }
+
+    </table>
+
+    <table class="table">
+
+
+    </table>
+
+    @if (null != TempData["Message"])
+    {
+        <script type="text/javascript">
+        alert("@TempData["Message"]");
+        </script>
+    }
+
+</body>
+</html>

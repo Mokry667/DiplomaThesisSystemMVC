@@ -11,7 +11,7 @@ namespace DiplomaThesisSystemMVC.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Review
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,6 +25,7 @@ namespace DiplomaThesisSystemMVC.Models
         public string ReviewerID { get; set; }
         public string Topic { get; set; }
         public string Content { get; set; }
+
         public Nullable<int> Grade { get; set; }
     
         public virtual DiplomaThesis DiplomaThesis { get; set; }
