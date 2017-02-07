@@ -67,5 +67,36 @@ namespace DiplomaThesisSystemMVC.Controllers.Diploma_Thesis_Management
             return View(diplomaThesisTopic);
         }
 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult TCreate([Bind(Include = "Name,Description,NumberOfStudents,FieldOfStudy,Degree")] DiplomaThesisTopic diplomaThesisTopic, string userID)
+        {
+            // set default values
+            diplomaThesisTopic.TeacherID = userID;
+            diplomaThesisTopic.Availability = "Free";
+            diplomaThesisTopic.ReviewerID = null;
+            diplomaThesisTopic.Status = "NotVoted";
+
+            //add some checks
+
+
+            if (ModelState.IsValid)
+            {
+                string name = diplomaThesisTopic.Name;
+                if (db.DiplomaThesisTopic.Any(topic => topic.Name == name))
+                {
+                    TempData["Message"] = "Topic is already on a list";
+                    return RedirectToAction("Index");
+                }
+
+                db.DiplomaThesisTopic.Add(diplomaThesisTopic);
+                db.SaveChanges();
+                TempData["Message"] = "Topic added successfully";
+                return RedirectToAction("Index");
+            }
+            return View(diplomaThesisTopic);
+        }
+
     }
 }

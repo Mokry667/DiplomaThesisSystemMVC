@@ -8,6 +8,13 @@
 </head>
 <body>
 
+    @if (null != TempData["Message"])
+    {
+        <script type="text/javascript">
+        alert("@TempData["Message"]");
+        </script>
+    }
+
     <div class="row">
         <div class="col-md-9"><h4>Diploma Thesis</h4></div>
         <div class="col-md-3"><h4>Student</h4></div>
@@ -84,13 +91,6 @@
 
 
     </table>
-
-    @if (null != TempData["Message"])
-    {
-        <script type="text/javascript">
-        alert("@TempData["Message"]");
-        </script>
-    }
 
 </body>
 </html>

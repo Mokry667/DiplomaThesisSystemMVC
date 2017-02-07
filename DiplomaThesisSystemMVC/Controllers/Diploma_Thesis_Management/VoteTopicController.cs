@@ -87,5 +87,24 @@ namespace DiplomaThesisSystemMVC.Controllers.Diploma_Thesis_Management
             return RedirectToAction("Index");
         }
 
+        public ActionResult TConfirm(string userID)
+        {
+            foreach (var id in statusList)
+            {
+                DiplomaThesisTopic diplomaThesisTopic = db.DiplomaThesisTopic.Find(id);
+                Vote vote = new Vote();
+
+                vote.DiplomaThesisTopicID = diplomaThesisTopic.ID;
+                vote.TeacherID = userID;
+                db.Vote.Add(vote);
+
+                diplomaThesisTopic.Status = "Accepted";
+                db.Entry(diplomaThesisTopic).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            TempData["Message"] = "Changes saved successfully";
+            return RedirectToAction("Index");
+        }
+
     }
 }
