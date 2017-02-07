@@ -20,6 +20,8 @@ namespace DiplomaThesisSystemMVC
             // setSupervisor("Degeorge", 592194);
             // setSupervisor("Mcintire", 246821);
             // setSupervisor("Degeorge", 582910);
+            addNewUser("supervisor3@pwr.edu.pl", "password", "supervisor3@pwr.edu.pl", "Supervisor");
+            addSupervisor("supervisor3@pwr.edu.pl", "Elizabeth", "Taylor", "Dr", "W8 - Computer Science and Management");
         }
 
         private void populateRoles()

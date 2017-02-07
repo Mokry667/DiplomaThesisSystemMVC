@@ -4,8 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace DiplomaThesisSystemMVC.Controllers
+namespace DiplomaThesisSystemMVC.Controllers.Website
 {
+
     public class EmptyPageController : Controller
     {
         // GET: EmptyPage

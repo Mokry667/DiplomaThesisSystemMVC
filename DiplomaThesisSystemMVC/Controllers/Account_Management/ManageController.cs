@@ -8,7 +8,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using DiplomaThesisSystemMVC.Models;
 
-namespace DiplomaThesisSystemMVC.Controllers
+namespace DiplomaThesisSystemMVC.Controllers.Account_Management
 {
     [Authorize]
     public class ManageController : Controller
