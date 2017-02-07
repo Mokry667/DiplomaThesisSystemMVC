@@ -21,6 +21,8 @@ namespace DiplomaThesisSystemMVC.Controllers.Diploma_Thesis_Management
             string studentID = User.Identity.GetUserId();
             var student = db.Student.Include(s => s.DiplomaThesis).Include(s => s.DiplomaThesisTopic).Include(s => s.Review).Include(s => s.Teacher).Where(s => s.ID == studentID);
             var diplomaThesis = db.Student.Include(s => s.DiplomaThesis).Where(s => s.ID == studentID).Where(s => s.DiplomaThesisID != null);
+            Review review = student.First(s => s.ID == studentID).Review;
+
 
             if (!diplomaThesis.Any())
             {
@@ -28,10 +30,10 @@ namespace DiplomaThesisSystemMVC.Controllers.Diploma_Thesis_Management
                 return View(student.ToList());
             }
 
-            if (!student.Any() && diplomaThesis.Any())
+            if (diplomaThesis.Any() && review.Content == null)
             {
                 TempData["Message"] = "Reviewing in progress";
-                return View();
+                return View(student.ToList());
             }
             return View(student.ToList());
         }
